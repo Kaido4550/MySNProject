@@ -1,0 +1,16 @@
+name: Verification automatique
+on: [push, pull_request]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v3
+
+      - name: Vérifier la présence du README
+        run: |
+          if [ ! -f README.md ]; then
+            echo "Erreur : README.md est manquant !"
+            exit 1
+          fi
